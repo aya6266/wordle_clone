@@ -1,5 +1,5 @@
 import wordleBank from "./wordleBank.txt";
-
+import { getStorage, ref } from "firebase/storage";
 export const boardDefault = [
   ["", "", "", "", ""],
   ["", "", "", "", ""],
@@ -9,12 +9,14 @@ export const boardDefault = [
   ["", "", "", "", ""],
 ];
 
+const wordSetFile = ref(wordleBank);
+
 export const generateWordSet = async () => {
   //uses a set instead of an array as its more effienct than looping over >2000 words
   //Look up time is O(1)
   let wordSet;
   let todaysWord;
-  await fetch(wordleBank)
+  await fetch(wordSetFile)
     .then((response) => response.text())
     .then((result) => {
       const wordArr = result.split("\r\n");
