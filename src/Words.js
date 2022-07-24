@@ -16,6 +16,7 @@ export const generateWordSet = async () => {
   //Look up time is O(1)
   let wordSet;
   let todaysWord;
+
   await fetch(wordSetFile)
     .then((response) => response.text())
     .then((result) => {
